@@ -12,9 +12,9 @@ GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(options.ledgpio, GPIO.OUT)
 if GPIO.input(options.ledgpio):
-	print("Turning led on gpio",options.ledgpio,"OFF")
+	print 'Turning led in gpio {} OFF'.format(options.ledgpio)
 	GPIO.output(options.ledgpio,False)
 else:
-	print("Turning led on gpio",options.ledgpio,"OFF")
+	print 'Turning led in gpio {} ON'.format(options.ledgpio)
 	GPIO.output(options.ledgpio,True)
 
