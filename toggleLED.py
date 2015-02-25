@@ -1,7 +1,6 @@
 #!/usr/bin/python
 
 import RPi.GPIO as GPIO
-import time
 from optparse import OptionParser
 
 parser = OptionParser()
