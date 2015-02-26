@@ -6,7 +6,7 @@ from optparse import OptionParser
 
 parser = OptionParser()
 parser.add_option("-l", "--led", action="store", type="int", dest="ledgpio", default=4, help="GPIO number where led is connected")
-parser.add_option("-i", "--interval", action="store", type="float", dest="blinkinterval", default=4, help="Time interval for led blinking")
+parser.add_option("-i", "--interval", action="store", type="float", dest="blinkinterval", default=0.5, help="Time interval for led blinking")
 (options, args) = parser.parse_args()
 
 offtime = 0.1
