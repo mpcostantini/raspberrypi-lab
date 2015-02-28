@@ -5,17 +5,19 @@ import time
 from optparse import OptionParser
 
 parser = OptionParser()
-parser.add_option("-l", "--led", action="store", type="int", dest="ledgpio", default=4, help="GPIO number where led is connected")
-parser.add_option("-i", "--interval", action="store", type="float", dest="blinkinterval", default=0.5, help="Time interval for led blinking")
+parser.add_option("-o", "--gpioout", action="store", type="int", dest="gpioout", default=4, help="GPIO number where OUTPUT device is connected")
+parser.add_option("-t", "--time", action="store", type="float", dest="blinktime", default=0.5, help="Time interval for blinking")
 (options, args) = parser.parse_args()
 
 offtime = 0.1
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(options.ledgpio, GPIO.OUT)
+GPIO.setup(options.gpioout, GPIO.OUT)
 while True:
-	GPIO.output(options.ledgpio,True)
+	print 'Turning gpio {} ON'.format(options.gpioout)
+	GPIO.output(options.gpioout,True)
 	time.sleep(offtime)
-	GPIO.output(options.ledgpio,False)
-	time.sleep(options.blinkinterval)
-
+	print 'Turning gpio {} OFF for {} seconds'.format(options.gpioout, options.blinktime)
+	GPIO.output(options.gpioout,False)
+	time.sleep(options.blinktime)
+GPIO.cleanup()

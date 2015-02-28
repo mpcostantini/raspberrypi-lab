@@ -4,16 +4,15 @@ import RPi.GPIO as GPIO
 from optparse import OptionParser
 
 parser = OptionParser()
-parser.add_option("-l", "--led", action="store", type="int", dest="ledgpio", default=4, help="GPIO number where led is connected")
+parser.add_option("-o", "--gpioout", action="store", type="int", dest="gpioout", default=4, help="GPIO number where OUTPUT device is connected")
 (options, args) = parser.parse_args()
 
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(options.ledgpio, GPIO.OUT)
-if GPIO.input(options.ledgpio):
-	print 'Turning led in gpio {} OFF'.format(options.ledgpio)
-	GPIO.output(options.ledgpio,False)
+GPIO.setup(options.gpioout, GPIO.OUT)
+if GPIO.input(options.gpioout):
+	print 'Turning gpio {} OFF'.format(options.gpioout)
+	GPIO.output(options.gpioout,False)
 else:
-	print 'Turning led in gpio {} ON'.format(options.ledgpio)
-	GPIO.output(options.ledgpio,True)
-
+	print 'Turning gpio {} ON'.format(options.gpioout)
+	GPIO.output(options.gpioout,True)
