@@ -17,7 +17,6 @@ class GPIOReader:
 		self.options = GPIOReader.init_option_parser()    
 		self.init_gpio()
 
-
 	def log_input(self, channel):
 		if GPIO.input(channel) == GPIO.HIGH:
 			print('Input turned ON')
