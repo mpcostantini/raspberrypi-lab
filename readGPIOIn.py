@@ -14,14 +14,17 @@ class GPIOReader:
 		return options
 
 	def __init__(self):
+		self.last_event_time = time.time()
 		self.options = GPIOReader.init_option_parser()    
 		self.init_gpio()
 
 	def log_input(self, channel):
+		new_event_time = time.time()
 		if GPIO.input(channel) == GPIO.HIGH:
-			print('Input turned ON')
+			print 'Input turned ON after {} seconds'.format(new_event_time - self.last_event_time)
 		else:
-			print('Input turned OFF')
+			print 'Input turned OFF after {} seconds'.format(new_event_time - self.last_event_time)
+		self.last_event_time = new_event_time
 
 	def init_gpio(self):
 		GPIO.setmode(GPIO.BCM)	
