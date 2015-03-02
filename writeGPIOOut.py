@@ -28,6 +28,7 @@ class GPIOWriter:
 
 	def readJsons(self):
 		for jsonline in self.in_json_file:
+			print jsonline
 			yield json.loads(jsonline)
 
 	def writeGPIO(self):
