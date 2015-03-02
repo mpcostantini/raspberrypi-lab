@@ -11,14 +11,15 @@ class GPIOReader:
 	def init_option_parser(cls):
 		parser = OptionParser()
 		parser.add_option("-i", "--gpioin", action="store", type="int", dest="gpioin", default=4, help="GPIO number where INPUT device is connected")
+		parser.add_option("-f", "--jsonfile", action="store", type="string", dest="jsonoutputfile", default="gpio-events.json", help="JSON File for commands read from GPIO")
 		(options, args) = parser.parse_args()
 		return options
 
 	def __init__(self):
 		self.last_event_time = time.time()
 		self.options = GPIOReader.init_option_parser()    
-		self.out_json_file = open('gpio-events.json', 'w')
-		#self.out_json = {'events': []}
+		self.json_file = self.options.jsonoutputfile
+		self.out_json_file = open(self.json_file, 'w')
 		self.init_gpio()
 
 	def log_input(self, channel):
