@@ -2,6 +2,7 @@
 
 import RPi.GPIO as GPIO
 import time
+import sys
 from optparse import OptionParser
 
 parser = OptionParser()
@@ -14,10 +15,15 @@ GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(options.gpioout, GPIO.OUT)
 while True:
-	print 'Turning gpio {} ON'.format(options.gpioout)
-	GPIO.output(options.gpioout,True)
-	time.sleep(offtime)
-	print 'Turning gpio {} OFF for {} seconds'.format(options.gpioout, options.blinktime)
-	GPIO.output(options.gpioout,False)
-	time.sleep(options.blinktime)
-GPIO.cleanup()
+  try:
+    print 'Turning gpio {} ON'.format(options.gpioout)
+    GPIO.output(options.gpioout,True)
+    time.sleep(offtime)
+    print 'Turning gpio {} OFF for {} seconds'.format(options.gpioout, options.blinktime)
+    GPIO.output(options.gpioout,False)
+    time.sleep(options.blinktime)
+  except KeyboardInterrupt:  
+    print 'Exiting blinkGPIOOut. Doing GPIO cleanup.'
+    GPIO.cleanup()
+    sys.exit()
+
