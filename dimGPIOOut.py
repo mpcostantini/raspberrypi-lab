@@ -17,16 +17,17 @@ GPIO.setup(options.gpioout, GPIO.OUT)
 p = GPIO.PWM(options.gpioout, options.frequency)
 p.start(0)
 try:
-    while 1:
-    	print 'Diming gpio {} to ON'.format(options.gpioout)
-        for dc in range(0, 101, options.step):
-            p.ChangeDutyCycle(dc)
-            time.sleep(options.dimtime)
-        print 'Diming gpio {} to OFF'.format(options.gpioout)
-        for dc in range(100, -1, options.step*(-1)):
-            p.ChangeDutyCycle(dc)
-            time.sleep(options.dimtime)
+  while 1:
+    print 'Diming gpio {} to ON'.format(options.gpioout)
+    for dc in range(0, 101, options.step):
+      p.ChangeDutyCycle(dc)
+      time.sleep(options.dimtime)
+    print 'Diming gpio {} to OFF'.format(options.gpioout)
+    for dc in range(100, -1, options.step*(-1)):
+      p.ChangeDutyCycle(dc)
+      time.sleep(options.dimtime)
 except KeyboardInterrupt:
-    pass
+  print 'Exiting dimGPIOOut. PWM stop and GPIO cleanup.' 
+  pass 
 p.stop()
 GPIO.cleanup()
